@@ -64,8 +64,7 @@ $ forge --help
 $ anvil --help
 $ cast --help
 ```
-
-
+## Importtant Info
 vm.startBroadcast() is a cheatcode that should only be called from inside run() or other explicitly controlled parts of the script.
 
 When it's triggered during script construction, Foundry isn’t fully ready to manage transactions yet.
