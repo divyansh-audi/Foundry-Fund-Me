@@ -31,12 +31,19 @@ contract InteractionTest is Test {
         // assertEq(funder, USER);
 
         //withdraw test
+        uint256 preUserBalance = address(USER).balance;
+        uint256 preOwnerBalance = address(fundMe.getOwner()).balance;
+
         FundFundMe x = new FundFundMe();
         x.fundFundMe(address(fundMe));
 
         WithdrawFundMe withdrawFundMe = new WithdrawFundMe();
         withdrawFundMe.withdrawFundMe(address(fundMe));
+        uint256 afterUserBalance = address(USER).balance;
+        uint256 afterOwnerBalance = address(fundMe.getOwner()).balance;
 
         assert(address(fundMe).balance == 0);
+        assertEq(afterUserBalance + AMOUNT_FUNDED, preUserBalance);
+        assertEq(preOwnerBalance + AMOUNT_FUNDED, afterOwnerBalance);
     }
 }
